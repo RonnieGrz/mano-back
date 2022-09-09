@@ -1,20 +1,26 @@
 const express = require('express');
-const v1UserRouter = require('./v1/routes/userRoutes.js');
+const cors = require('cors')
+const v1UserRouter = require('./v1/routes/userRoutes');
+const v1SavingRouter = require('./v1/routes/savingRoutes');
 const sequelize = require('./database/db.js');
-const user = require('./models/User.js');
-const saving = require('./models/Saving.js');
 
 const app = express();
+app.use(cors());
 
-const PORT = process.env.PORT || 3000;
+
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
-app.use("/api/v1/", v1UserRouter);
+app.use("/api/v1", v1SavingRouter);
+app.use("/api/v1", v1UserRouter);
+
+
 
 
 async function main(){
     try{
         await sequelize.sync({force: false});
+
         app.listen(PORT);
     }
     catch(e){

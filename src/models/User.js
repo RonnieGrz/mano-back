@@ -25,13 +25,13 @@ const User = sequelize.define('users',{
 })
 
 User.hasMany(saving, {
-    foreignKey: 'documento_asociado',
-    sourceKey: 'documento',
+    foreignKey: 'user_id',
+    sourceKey: 'id',
 })
 
 saving.belongsTo(User,{
-    foreignKey: 'documento_asociado',
-    targetId: 'documento',
+    foreignKey: 'user_id',
+    targetId: 'id',
 })
 
 module.exports = User;

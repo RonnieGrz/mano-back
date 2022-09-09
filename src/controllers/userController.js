@@ -3,7 +3,6 @@ const User = require('../models/User.js');
 
 const getAllUsers = async(req, res) => {
     const allUsers = await userService.getAllUsers();
-    console.log(req.body)
     res.json(allUsers);
 }
 
