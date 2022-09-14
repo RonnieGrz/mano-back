@@ -1,37 +1,45 @@
+const sequelize = require('../database/db.js');
 const Saving = require('../models/Saving.js');
 
 
-const getTotal = () => {
-    const allUsers = Saving.findAll()
-    return allUsers;
+const getTotalSavingsbyUser = (userId) => {
+    const allSavings = Saving.findAll({
+        where:{
+            user_id: userId
+        },
+    })
+
+    return allSavings;
 }
 
-const getUserSavings = (user) => {
-    const savingsByUser = Saving.findOne({
-        attributes: [se],
+const getUserSavingsById = (userId) => {
+    const savingsByUser = Saving.findAll({
+        attributes:['user_id', [sequelize.fn('sum', sequelize.col('valor_pago')), 'total_ahorros']],
         where:{
-            id: user.id,
-            documento_asociado: user.documento,
-        }
+            user_id: userId
+        },
+        group:['documento_asociado'],
+
     })
+    console.log(savingsByUser)
     return savingsByUser;
 }
 
 const createSaving =  (user) => {
     console.log(user)
     const savingCreated = Saving.create({
-        id: user.id,
-        documento_asociado: user.documento,
-        user_id: user.id,
+        documento_asociado: user.documento_asociado,
+        user_id: user.user_id,
+        mes_abonado: user.mes_abonado,
         valor_pago: user.valor_pago,
-        email: user.email,
+        fecha_pago: user.fecha_pago,
     })
     return savingCreated;
 }
 
 
 module.exports = {
-    getTotal,
-    getUserSavings,
+    getTotalSavingsbyUser,
+    getUserSavingsById,
     createSaving
 }

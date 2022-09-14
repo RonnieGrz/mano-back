@@ -6,7 +6,7 @@ const Saving = sequelize.define('ahorros',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true,
+        autoIncrement: true
     },
     documento_asociado:{
         type: DataTypes.BIGINT,

@@ -5,23 +5,28 @@ const getTotal = async(req, res) => {
     res.json(allUsers);
 }
 
-const getUserSavings = (req, res) => {
-    res.send("usuario");
+
+
+const getUserSavings = async(req, res) => {
+    const {params } = req;
+    const userId = params.userId;
+    const savingsById = await savingService.getTotalSavingsbyUser(userId)
+    console.log(savingsById);
+    res.json(savingsById);
 }
 
 const createSaving = async(req, res) => {
-    const { body } = req;
+    const { body, params } = req;
+    const userId = params.userId;
 
-    if(!body.user_id  ||
-       !body.documento_asociado ||
+    if(!body.documento_asociado ||
        !body.valor_pago ||
        !body.fecha_pago){
         return;
        }
     
     const pago = {
-        id: body.id,
-        user_id: body.user_id,
+        user_id: userId,
         documento_asociado: body.documento_asociado,
         valor_pago: body.valor_pago,
         mes_abonado: body.mes_abonado,

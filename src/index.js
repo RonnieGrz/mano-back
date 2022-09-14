@@ -7,12 +7,11 @@ const sequelize = require('./database/db.js');
 const app = express();
 app.use(cors());
 
-
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use("/api/v1", v1SavingRouter);
-app.use("/api/v1", v1UserRouter);
+app.use("/savings", v1SavingRouter);
+app.use("/users", v1UserRouter);
 
 
 
@@ -20,7 +19,6 @@ app.use("/api/v1", v1UserRouter);
 async function main(){
     try{
         await sequelize.sync({force: false});
-
         app.listen(PORT);
     }
     catch(e){

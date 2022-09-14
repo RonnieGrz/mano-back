@@ -5,9 +5,9 @@ const savingController = require('../../controllers/savingController.js');
 
 
 router
-    .get("/savings", savingController.getTotal)
-    .get("/savings/:userId", savingController.getUserSavings)
-    .post("/savings/:userId", savingController.createSaving)
+    .get("/", savingController.getTotal)
+    .get("/:userId", savingController.getUserSavings)
+    .post("/:userId", savingController.createSaving)
     .use(cors)
 
 module.exports = router;
