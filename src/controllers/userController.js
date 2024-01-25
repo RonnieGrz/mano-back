@@ -14,13 +14,18 @@ const getUSer = (req, res) => {
 const createUser = async(req, res) => {
     const { body } = req;
 
+    try{
+        console.log("Entra al create user")
+         console.log(JSON.stringify(body));
+
     if(!body.documento  ||
        !body.nombres ||
        !body.apellidos ||
        !body.email){
-        return;
+        return null;
        }
     
+    console.log("Pasa al await")
     const createdUSer =  await User.create({
         documento: body.documento,
         nombres: body.nombres,
@@ -28,7 +33,11 @@ const createUser = async(req, res) => {
         email: body.email,
     })
 
-    res.json(createdUSer);;
+    res.json(createdUSer);
+    }catch(err){
+        console.log(err);
+    }
+    
 
 }
 

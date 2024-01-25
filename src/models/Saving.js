@@ -1,28 +1,30 @@
-const DataTypes  = require('sequelize');
-const sequelize = require('../database/db.js')
+const DataTypes = require("sequelize");
+const sequelize = require("../database/db.js");
 
-
-const Saving = sequelize.define('ahorros',{
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+const Saving = sequelize.define(
+  "ahorros",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    documento_asociado:{
-        type: DataTypes.BIGINT,
+    documento_asociado: {
+      type: DataTypes.BIGINT,
     },
-    valor_pago:{
-        type: DataTypes.FLOAT,
+    valor_pago: {
+      type: DataTypes.FLOAT,
     },
-    mes_abonado:{
-        type: DataTypes.STRING,
+    mes_abonado: {
+      type: DataTypes.STRING,
     },
-    fecha_pago:{
-        type: DataTypes.STRING,
+    fecha_pago: {
+      type: DataTypes.STRING,
     },
-},    {
+  },
+  {
     timestamps: false,
-}
-    )
+  }
+);
 
 module.exports = Saving;
